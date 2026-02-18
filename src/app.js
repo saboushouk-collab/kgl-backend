@@ -1,0 +1,20 @@
+require("dotenv").config();
+const express = require("express");
+const connectDB = require("./config/db");
+
+const procurementRoutes = require("./routes/procurementRoutes");
+const salesRoutes = require("./routes/salesRoutes");
+const userRoutes = require("./routes/userRoutes");
+
+const app = express();
+connectDB();
+
+app.use(express.json());
+
+app.use("/procurement", procurementRoutes);
+app.use("/sales", salesRoutes);
+app.use("/users", userRoutes);
+
+app.listen(process.env.PORT, () =>
+    console.log(`Server running on port ${process.env.PORT}`)
+);
